@@ -1,0 +1,84 @@
+﻿@model MiniProject.External.PaginatedList<MiniProject.Models.Booking>
+
+<table class="table" id="dataTable" cellspacing="0">
+    <thead>
+        <tr>
+            <th>Booking ID</th>
+            <th>Room</th>
+            <th>Name</th>
+            <th>Company</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>From</th>
+            <th>To</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.Id)</td>
+                <td>@Html.DisplayFor(modelItem => item.Room.Name)</td>
+                <td>@Html.DisplayFor(modelItem => item.User_Full_Name)</td>
+                <td>@Html.DisplayFor(modelItem => item.User_Company)</td>
+                <td>@Html.DisplayFor(modelItem => item.User_Email)</td>
+                <td>@Html.DisplayFor(modelItem => item.User_Phone)</td>
+                <td>@Html.DisplayFor(modelItem => item.StartTime)</td>
+                <td>@Html.DisplayFor(modelItem => item.EndTime)</td>
+
+                <td class="options">
+                    <div class="btn-group">
+                        <a href="javascript:void(0)" title="Update" data-target="#edit-modal_@item.Id" data-toggle="modal">
+                            <i class="fa fa-cog fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0)" title="Delete" data-target="#delete-modal_@item.Id" data-toggle="modal">
+                            <i class="fa fa-times fa-fw"></i>
+                        </a>
+                    </div>
+                    <partial name="AddEdit_Partial/_partial_AddEdit_Booking" model="@item" />
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@{
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+    var pageStart = Model.PageIndex;
+    if (Model.PageIndex >= 2)
+    {
+        pageStart = Model.PageIndex == 2 ? 1 : pageStart - 2;
+    }
+}
+<nav class="pull-right">
+    <ul class="pagination">
+        <li class="page-item @prevDisabled">
+            <a asp-action="BookingManage"
+               asp-route-page="@(Model.PageIndex - 1)"
+               class="page-link">
+                <span aria-hidden="true">&lt;</span>
+            </a>
+        </li>
+        @for (int i = pageStart; i < Model.PageIndex + 4 && i <= Model.TotalPages; i++)
+        {
+            var disabled = Model.PageIndex == i ? "disabled" : "";
+            <li class="page-item @disabled">
+                <a asp-action="BookingManage"
+                   asp-route-page="@i"
+                   class="page-link choose">
+                    <span aria-hidden="true">@i</span>
+                </a>
+            </li>
+        }
+
+        <li class="page-item @nextDisabled">
+            <a asp-action="BookingManage"
+               asp-route-page="@(Model.PageIndex + 1)"
+               class="page-link">
+                <span aria-hidden="true">&gt;</span>
+            </a>
+        </li>
+    </ul>
+</nav>

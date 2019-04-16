@@ -1,0 +1,516 @@
+﻿@color0: #d19b3d;
+@color1: #23282e;
+@color2: #4f5b69;
+@color3: #e1ffff;
+@color4: #181c20;
+@color5: #020203;
+@color6: #ffffff;
+@color7: #f8f8f8;
+@color8: #111111;
+
+@width0: 100%;
+
+.Button {
+    background: #cccccc;
+    height: 50px;
+    left: 0px;
+    overflow: hidden;
+    padding-bottom: 10px;
+    padding-left: 0px;
+    padding-top: 10px;
+    position: relative;
+    right: 0px;
+    width: @width0;
+}
+
+.nav-side-menu {
+    background-color: #2e353d;
+    color: @color3;
+    font-family: verdana;
+    font-size: 12px;
+    font-weight: 200;
+    height: 100%;
+    overflow: auto;
+    padding-left: 0px;
+    position: fixed;
+    top: 0px;
+    width: 17%;
+
+    .brand {
+        background-color: @color1;
+        display: block;
+        font-size: 14px;
+        line-height: 50px;
+        text-align: center;
+    }
+
+    .toggle-btn {
+        background-color: #ffffff;
+        color: #000000;
+        cursor: pointer;
+        display: block;
+        display: none;
+        padding: 3px;
+        position: absolute;
+        right: 10px;
+        text-align: center;
+        top: 10px;
+        width: 40px;
+        z-index: 10 !important;
+    }
+
+    ul {
+        cursor: pointer;
+        line-height: 35px;
+        list-style: none;
+        margin: 0px;
+        padding: 0px;
+
+        &:not(collapsed) {
+            .arrow {
+                &:before {
+                    content: "\f13a";
+                    display: inline-block;
+                    float: right;
+                    font-family: 'Font Awesome 5 Free';
+                    font-weight: 900;
+                    padding-left: 10px;
+                    padding-right: 10px;
+                    vertical-align: middle;
+                }
+            }
+        }
+
+        .active {
+            background-color: @color2;
+            border-left: 3px solid @color0;
+        }
+
+        .sub-menu {
+            li.active {
+                color: @color0;
+
+                a {
+                    color: @color0;
+                }
+            }
+
+            li {
+                background-color: @color4;
+                border-bottom: 1px solid @color1;
+                border: none;
+                line-height: 28px;
+                margin-left: 0px;
+
+                &:hover {
+                    background-color: @color5;
+                }
+
+                &:before {
+                    content: "\f105";
+                    display: inline-block;
+                    font-family: 'Font Awesome 5 Free';
+                    font-weight: 900;
+                    padding-left: 10px;
+                    padding-right: 10px;
+                    vertical-align: middle;
+                }
+            }
+        }
+    }
+
+    li {
+        border-bottom: 1px solid @color1;
+        border-left: 3px solid #84a3c6;
+        cursor: pointer;
+        line-height: 35px;
+        list-style: none;
+        margin: 0px;
+        padding-left: 0px;
+        padding: 0px;
+
+        &:not(collapsed) {
+            .arrow {
+                &:before {
+                    content: "\f13a";
+                    display: inline-block;
+                    float: right;
+                    font-family: 'Font Awesome 5 Free';
+                    font-weight: 900;
+                    padding-left: 10px;
+                    padding-right: 10px;
+                    vertical-align: middle;
+                }
+            }
+        }
+
+        .active {
+            background-color: @color2;
+            border-left: 3px solid @color0;
+        }
+
+        .sub-menu {
+            li.active {
+                color: @color0;
+
+                a {
+                    color: @color0;
+                }
+            }
+
+            li {
+                background-color: @color4;
+                border-bottom: 1px solid @color1;
+                border: none;
+                line-height: 28px;
+                margin-left: 0px;
+
+                &:hover {
+                    background-color: @color5;
+                }
+
+                &:before {
+                    content: "\f105";
+                    display: inline-block;
+                    font-family: 'Font Awesome 5 Free';
+                    font-weight: 900;
+                    padding-left: 10px;
+                    padding-right: 10px;
+                    vertical-align: middle;
+                }
+            }
+        }
+
+        a {
+            color: @color3;
+            text-decoration: none;
+
+            i {
+                padding-left: 10px;
+                padding-right: 20px;
+                width: 20px;
+            }
+        }
+
+        &:hover {
+            -moz-transition: all 1s ease;
+            -ms-transition: all 1s ease;
+            -o-transition: all 1s ease;
+            -webkit-transition: all 1s ease;
+            background-color: @color2;
+            border-left: 3px solid @color0;
+            transition: all 1s ease;
+        }
+    }
+}
+
+.brand {
+    font-size: 22px;
+    line-height: 50px !important;
+    padding-left: 20px;
+    text-align: left !important;
+}
+
+body {
+    margin: 0px;
+    padding: 0px;
+    font-size: 14px;
+}
+
+#content-wrapper {
+    padding-left: 17%;
+}
+
+@media (min-width: 767px) {
+    .nav-side-menu .menu-list .menu-content {
+        display: block;
+    }
+}
+
+@media (max-width: 767px) {
+    .nav-side-menu {
+        position: relative;
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    #content-wrapper {
+        padding: unset;
+    }
+
+    .nav-side-menu .toggle-btn {
+        display: block;
+        cursor: pointer;
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        z-index: 10 !important;
+        padding: 3px;
+        background-color: #ffffff;
+        color: #000;
+        width: 40px;
+        text-align: center;
+    }
+
+    .brand {
+        text-align: left !important;
+        font-size: 22px;
+        padding-left: 20px;
+        line-height: 50px !important;
+    }
+}
+
+
+.brand {
+    height: 84px;
+    background-color: #302d41;
+    display: inline-block;
+    text-align: unset;
+    padding: unset;
+    position: relative;
+}
+
+.logo-menu {
+    /*width: 154px;*/
+    height: 18px;
+    position: absolute;
+    top: 42%;
+    left: 21%;
+}
+
+.navbar {
+    padding: 2px 30px;
+}
+
+
+.user-panel {
+    overflow: hidden;
+    overflow: hidden;
+    padding: 10px;
+    position: relative;
+    white-space: nowrap;
+    width: @width0;
+
+    &:before {
+        content: " ";
+        display: table;
+    }
+
+    &:after {
+        content: " ";
+        display: table;
+    }
+}
+
+.pull-left {
+    float: left !important;
+}
+
+.user-panel > .image > img {
+    height: auto;
+    max-width: 45px;
+    width: @width0;
+}
+
+.img-circle {
+    border-radius: 50%;
+}
+
+.skin-blue {
+    .user-panel > .info {
+        color: @color0;
+    }
+
+    .user-panel > .info > a {
+        color: @color0;
+    }
+}
+
+.user-panel > .info {
+    left: 55px;
+    line-height: 1;
+    padding: 5px 5px 5px 15px;
+    position: absolute;
+}
+
+.user-panel > .info > p {
+    color: #b7b7b7;
+    font-weight: 600;
+    margin-bottom: 9px;
+}
+
+p {
+    margin: 0 0 10px;
+}
+
+.user-panel > .info > a {
+    font-size: 11px;
+    margin-top: 3px;
+    padding-right: 5px;
+    text-decoration: none;
+}
+
+.user-panel > .info > a > .fa {
+    margin-right: 3px;
+}
+
+.user-panel > .info > a > .ion {
+    margin-right: 3px;
+}
+
+.user-panel > .info > a > .glyphicon {
+    margin-right: 3px;
+}
+
+.Ellipse-1 {
+    background-color: #302d41;
+    .img-circle();
+    border: solid 2px @color6;
+    height: 40px;
+
+    i {
+        margin-top: 15%;
+        text-align: center;
+        width: 40px;
+    }
+}
+
+
+.container-fluid {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem
+}
+
+.card {
+    border-radius: unset;
+
+    .card-header {
+        border-bottom: unset;
+        background-color: unset;
+
+        h6 {
+            padding-bottom: 13px
+        }
+
+        .fixed-padding {
+            padding-left: 7px;
+            padding-right: 7px;
+        }
+
+        .group-booking {
+            border-radius: 5px;
+            border: solid 1px #ebebeb;
+            background-color: #f8f8f8;
+
+            .list-item {
+                height: 175px;
+                overflow-y: auto;
+
+                .booking-item {
+                    border: solid 1px #ebebeb;
+                    padding-top: 13px;
+                    padding-bottom: 16px
+                }
+            }
+
+            .text-title {
+                background-color: #ffffff;
+                padding-top: 13px;
+                padding-bottom: 16px
+            }
+        }
+    }
+
+    .card-body {
+        padding: unset;
+        background-color: @color7;
+    }
+
+    .card-footer {
+        padding: unset;
+        background-color: rgba(0, 0, 0, 0.03);
+        border-top: unset;
+    }
+}
+
+table {
+    th {
+        border-top: unset !important;
+        color: #1565c0
+    }
+
+    td {
+        border-top: unset !important;
+        border-bottom: 1px solid #cccccc;
+        color: @color8
+    }
+
+    i {
+        font-size: 1.5em !important;
+        color: #7d7d7d;
+    }
+
+    .options {
+        text-align: right;
+    }
+
+    span.active {
+        color: #1976d2;
+    }
+
+    span.inactive {
+        color: #e53935;
+    }
+}
+
+.pagination {
+
+    .page-link {
+        background-color: unset;
+        border: unset;
+        color: @color8;
+        margin-left: 0px;
+    }
+
+    .disabled {
+        a.choose {
+            background-color: @color7 !important;
+            border-radius: 5px;
+            border: solid 1px #959595;
+        }
+
+        a {
+            background-color: @color7 !important;
+        }
+    }
+}
+
+.modal {
+    text-align: left;
+
+    .modal-header {
+        h4 {
+            font-size: 16px;
+            font-weight: 500;
+        }
+    }
+
+    .modal-body {
+        padding-bottom: unset;
+    }
+
+    .modal-footer {
+        border-top: unset;
+        padding-top: unset;
+
+        button {
+            padding-left: 1em;
+            padding-right: 1em;
+        }
+
+        .btn-light {
+            background-color: #78909c;
+            color: #fff;
+        }
+    }
+}

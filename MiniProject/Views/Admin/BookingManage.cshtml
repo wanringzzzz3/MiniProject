@@ -1,0 +1,113 @@
+﻿@model MiniProject.External.PaginatedList<MiniProject.Models.Booking>
+@{
+    ViewData["Title"] = "Booking Manage";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    var rooms = ViewData["Rooms"] as IEnumerable<Room>;
+    var provisionals = Model.Where(e => e.CheckBookingByDate());
+    var notAvailables = rooms.Where(e => !e.Active());
+    var availables = rooms.Where(e => e.Active() && !provisionals.Any(b => b.RoomId == e.Id));
+}
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-dark">Booking Management</h6>
+        <div class="row">
+            <div class="col-md-4 fixed-padding">
+                <div class="group-booking">
+                    <div class="col-md-12 text-title">
+                        <div class="Ellipse-2 success"></div> Available
+                    </div>
+                    <div class="col-md-12 list-item">
+                        <div class="row">
+                            @foreach (var item in availables)
+                            {
+                                <div class="col-md-12 booking-item">
+                                    @item.Name
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 fixed-padding">
+                <div class="group-booking">
+                    <div class="col-md-12 text-title">
+                        <div class="Ellipse-2 warning"></div> Provisional
+                    </div>
+                    <div class="col-md-12 list-item">
+                        <div class="row">
+                            @foreach (var item in provisionals)
+                            {
+                                <div class="col-md-12 booking-item">
+                                    @item.Room.Name
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 fixed-padding">
+                <div class=" group-booking">
+                    <div class="col-md-12 text-title">
+                        <div class="Ellipse-2 danger"></div> NotAvailable
+                    </div>
+                    <div class="col-md-12 list-item">
+                        <div class="row">
+                            @foreach (var item in notAvailables)
+                            {
+                                <div class="col-md-12 booking-item">
+                                    @item.Name
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="card-body">
+        <div class="table-responsive ajax-search-group">
+            <div class="row ml-1 mr-1">
+                <div class="col-sm-12 col-md-9">
+                    <form id="filter-form" asp-action="FilterBooking">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-2 mt-3">
+                                <i class="fa fa-circle text-success"></i> &nbsp;&nbsp; Booking List
+                            </div>
+                            <div class="col-sm-12 col-md-3 mt-3">
+                                <select class="form-control select2" name="roomId">
+                                    <option value="0">Room</option>
+                                    @foreach (var item in rooms)
+                                    {
+                                        <!option value="@item.Id">
+                                            @item.Name
+                                        </!option>
+                                    }
+                                </select>
+                            </div>
+                            <div class="col-sm-12 col-md-4 mt-3">
+                                <div class="input-group">
+                                    <input type="text" name="searchName" class="form-control" value="" />
+                                    <div class="input-group-append">
+                                        <span class="input-group-text" id="basic-addon2"><i class="fa fa-search"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+                <div class="col-sm-12 col-md-3 mt-3" align="right">
+                    <button data-toggle="modal" data-target="#add-modal" class="btn btn-primary"> Create </button>
+                    <partial name="AddEdit_Partial/_partial_AddEdit_Booking" model="new Booking()" />
+                </div>
+            </div>
+            <div class="Search_Result">
+                <partial name="Search_Result/_partial_Search_Booking" model="Model" />
+            </div>
+
+        </div>
+    </div>
+
+</div>

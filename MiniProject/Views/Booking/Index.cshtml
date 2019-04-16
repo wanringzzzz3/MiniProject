@@ -1,0 +1,82 @@
+﻿@model MiniProject.Models.Booking
+
+@{
+    ViewData["Title"] = "Add Booking";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var rooms = ViewData["Rooms"] as IEnumerable<Room>;
+}
+<div class="row justify-content-center">
+
+    <div class="booking-panel">
+        <div class="col-xs-12 col-md-12">
+            <p class="Title">Booking</p>
+            <p class="Sub-title">Choose the room you need</p>
+        </div>
+        <div class="col-xs-12 col-md-12">
+            <form asp-action="AddBooking" id="add-booking">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Id" />
+                <input type="hidden" asp-for="Status" />
+                <input type="hidden" asp-for="Created_Date" />
+                <div class="form-group">
+                    <input asp-for="User_Full_Name" class="form-control" placeholder="Your Name" />
+                    <span asp-validation-for="User_Full_Name" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input asp-for="User_Company" class="form-control" placeholder="Company" />
+                    <span asp-validation-for="User_Company" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input asp-for="User_Email" class="form-control" placeholder="Email" />
+                    <span asp-validation-for="User_Email" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input asp-for="User_Phone" class="form-control" placeholder="Phone Number" />
+                    <span asp-validation-for="User_Phone" class="text-danger"></span>
+                </div>
+                <hr />
+                <div class="form-group">
+                    <div class="input-group">
+                        <input type="text" id="StartTime" name="StartTime" size="16" class="form-control  input-append date form_datetime" readonly placeholder="When will it start?">
+                        <div class="input-group-append">
+                            <span class="input-group-text" id="basic-addon2"><i class="fa fa-calendar"></i></span>
+                        </div>
+                        <span asp-validation-for="StartTime" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <input type="text" id="EndTime" name="EndTime" size="16" class="form-control input-append date to_datetime" readonly placeholder="When will it end?">
+                        <div class="input-group-append">
+                            <span class="input-group-text" id="basic-addon2"><i class="fa fa-calendar"></i></span>
+                        </div>
+                        <span asp-validation-for="EndTime" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group select-room-group">
+                    @*<select class="form-control select2 select-room" asp-for="RoomId">
+                        <option value=""></option>
+                        @foreach (var item in rooms)
+                        {
+                            var statusString = @item.RoomStatusByDate(Model.StartTime, Model.EndTime);
+                            var dis = statusString != "Available" ? "disabled" : "";
+
+                            <!option value="@item.Id"
+                                     data-status="@statusString"
+                                     data-content="@item.Description" @dis>
+                                @item.Name
+                            </!option>
+                        }
+                    </select>*@
+                    <partial name="_partial_LoadRoomByDate" model="Model"/>
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-dark booking-btn" type="submit">BOOK IT</button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+
+</div>

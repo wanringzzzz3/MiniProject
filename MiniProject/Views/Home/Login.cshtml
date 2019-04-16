@@ -1,0 +1,47 @@
+﻿@model MiniProject.Models.LoginModel
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout_Login.cshtml";
+}
+<div class="img-backgorund">
+    <img src="~/images/background.png"
+         srcset="/images/background@2x.png 2x,
+             /images/background@3x.png 3x"
+         class="background">
+</div>
+<div class="login-panel">
+
+    <div class="row">
+        <div class="col-md-12">
+            <img src="~/images/logo.png"
+                 srcset="/images/logo@2x.png 2x,
+             /images/logo@3x.png 3x"
+                 class="logo">
+        </div>
+
+        <div class="col-md-12">
+            <hr />
+        </div>
+        <div class="col-md-12">
+            <form asp-action="Login">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <span class="text-danger">@Html.ValidationMessage("CustomError")</span>
+                <div class="form-group">
+                    <input type="text" class="form-control usernamebox" asp-for="Username" placeholder="Username" />
+
+                    <span asp-validation-for="Username" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control passwordbox" asp-for="Password" placeholder="Password" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input Rectangle-3" name="rememberme" id="rememberme" />
+                    <label class="form-check-label" for="rememberme">Remember Me</label>
+                </div>
+                <button type="submit" class="btn btn-dark login-copy-2">Login</button>
+            </form>
+        </div>
+
+    </div>
+</div>

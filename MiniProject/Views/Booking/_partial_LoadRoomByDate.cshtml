@@ -1,0 +1,20 @@
+﻿@model MiniProject.Models.Booking
+
+@{
+    Layout = null;
+    var rooms = ViewData["Rooms"] as IEnumerable<Room>;
+}
+<select class="form-control select2 select-room" asp-for="RoomId">
+    <option value=""></option>
+    @foreach (var item in rooms)
+                        {
+                            var statusString = @item.RoomStatusByDate(Model.StartTime, Model.EndTime);
+                            var dis = statusString != "Available" ? "disabled" : "";
+
+    <!option value="@item.Id"
+             data-status="@statusString"
+             data-content="@item.Description" @dis>
+        @item.Name
+    </!option>
+                        }
+</select>

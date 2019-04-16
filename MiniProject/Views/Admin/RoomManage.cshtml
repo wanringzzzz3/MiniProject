@@ -1,0 +1,101 @@
+﻿@model MiniProject.External.PaginatedList<MiniProject.Models.Room>
+@{
+    ViewData["Title"] = "Room Manage";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-dark">Room Management</h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <div class="row ml-1 mr-1">
+                <div class="col-sm-12 col-md-6 mt-3">
+                    <i class="fa fa-circle text-success"></i> &nbsp;&nbsp; Room List
+                </div>
+                <div class="col-sm-12 col-md-6 mt-3" align="right">
+                    <button data-toggle="modal" data-target="#add-modal" class="btn btn-primary"> Create </button>
+                    <partial name="AddEdit_Partial/_partial_AddEdit_Room" model="new Room()"/>
+                </div>
+            </div>
+            <table class="table" id="dataTable" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Room</th>
+                        <th>Room Description</th>
+                        <th>Status</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.Id</td>
+                            <td>@item.Name</td>
+                            <td>@item.Description</td>
+                            <td>@Html.Raw(item.Get_RoomStatusEnumWithColor())</td>
+
+                            <td class="options">
+                                <div class="btn-group">
+                                    <a href="javascript:void(0)" title="Update" data-target="#edit-modal_@item.Id" data-toggle="modal">
+                                        <i class="fa fa-cog fa-fw"></i>
+                                    </a>
+                                    <a href="javascript:void(0)" title="Delete" data-target="#delete-modal_@item.Id" data-toggle="modal">
+                                        <i class="fa fa-times fa-fw"></i>
+                                    </a>
+                                </div>
+                                <partial name="AddEdit_Partial/_partial_AddEdit_Room" model="@item" />
+                                
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="card-footer">
+        @{
+            var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+            var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+            var pageStart = Model.PageIndex;
+            if (Model.PageIndex >= 2)
+            {
+                pageStart = Model.PageIndex == 2 ? 1 : pageStart - 2;
+            }
+        }
+        <nav class="pull-right">
+            <ul class="pagination">
+                <li class="page-item @prevDisabled">
+                    <a asp-action="RoomManage"
+                       asp-route-page="@(Model.PageIndex - 1)"
+                       class="page-link">
+                        <span aria-hidden="true">&lt;</span>
+                    </a>
+                </li>
+                @for (int i = pageStart; i < Model.PageIndex + 4 && i <= Model.TotalPages; i++)
+                {
+                    var disabled = Model.PageIndex == i ? "disabled" : "";
+                    <li class="page-item @disabled">
+                        <a asp-action="RoomManage"
+                           asp-route-page="@i"
+                           class="page-link choose">
+                            <span aria-hidden="true">@i</span>
+                        </a>
+                    </li>
+                }
+
+                <li class="page-item @nextDisabled">
+                    <a asp-action="RoomManage"
+                       asp-route-page="@(Model.PageIndex + 1)"
+                       class="page-link">
+                        <span aria-hidden="true">&gt;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
